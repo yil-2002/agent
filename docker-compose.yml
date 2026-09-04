@@ -9,7 +9,27 @@ services:
       resources:
         limits:
           memory: 512M
+    networks:
+      - app-network
+
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    restart: unless-stopped
+    ports:
+      - "8888:8080"
+    volumes:
+      - /root/app-stack/searxng:/etc/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=http://77.42.77.60:8888/
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    networks:
+      - app-network
 
 networks:
-  default:
+  app-network:
     name: app-network
+
