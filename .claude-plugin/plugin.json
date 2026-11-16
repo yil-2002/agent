@@ -1,0 +1,10 @@
+{
+  "name": "dirijyor",
+  "displayName": "Dirijyor",
+  "version": "0.1.0",
+  "description": "Multi-agent dirijyor: Opus vazifani qiyinlik bo'yicha Sonnet, Haiku va DeepSeek'ga taqsimlaydi",
+  "author": { "name": "yil-2002" },
+  "repository": "https://github.com/yil-2002/agent",
+  "license": "MIT",
+  "keywords": ["routing", "subagents", "deepseek", "cost"]
+}

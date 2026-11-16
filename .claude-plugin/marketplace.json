@@ -1,0 +1,12 @@
+{
+  "name": "dirijyor",
+  "description": "yil-2002 ning shaxsiy Claude Code plugin'lari",
+  "owner": { "name": "yil-2002" },
+  "plugins": [
+    {
+      "name": "dirijyor",
+      "source": "./",
+      "description": "Multi-agent dirijyor: Opus vazifani qiyinlik bo'yicha Sonnet, Haiku va DeepSeek'ga taqsimlaydi"
+    }
+  ]
+}
