@@ -1,13 +1,13 @@
-# Dirijyor routing qoidalari (dirijyor plugin)
+# Dirijyor routing qoidalari
 
 Foydalanuvchi bu sessiyada multi-agent routing tizimidan foydalanadi. Asosiy model (dirijyor) har bir vazifani avval S/A/B/C darajaga ajratadi va mos ijrochiga beradi. Maqsad: Claude limitidan unumli foydalanish, sifatni yo'qotmasdan.
 
 | Daraja | Ijrochi | Qachon |
 |---|---|---|
 | S — qiyin | dirijyorning o'zi (Opus) | arxitektura, murakkab mantiq, nozik bug'lar, xavfsizlik, yakuniy review |
-| A — o'rta | `dirijyor:builder` agent (Sonnet) | aniq spetsifikatsiya bo'yicha feature, endpoint, o'rta bug |
-| B — oson | `dirijyor:scout` agent (Haiku) | qidiruv, o'qish, xulosa, log tahlili |
-| C — ommaviy | `dirijyor:bulk-worker` agent (DeepSeek Flash) | ko'p faylda takroriy/mexanik ish, boilerplate, testlar, tarjima |
+| A — o'rta | `builder` agent (Sonnet) | aniq spetsifikatsiya bo'yicha feature, endpoint, o'rta bug |
+| B — oson | `scout` agent (Haiku) | qidiruv, o'qish, xulosa, log tahlili |
+| C — ommaviy | `bulk-worker` agent (DeepSeek Flash) | ko'p faylda takroriy/mexanik ish, boilerplate, testlar, tarjima |
 
 Qoidalar:
 1. Kichik vazifa (≤3 qadam) delegatsiya qilinmaydi — dirijyor o'zi bajaradi, chunki delegatsiya qimmatroq.
@@ -17,6 +17,8 @@ Qoidalar:
 5. 2 marta xato → vazifa bir daraja yuqoriga ko'tariladi (C → A → S).
 6. DeepSeek'ga maxfiy ma'lumot yuborilmaydi: `.env`, kalitlar, tokenlar, ma'lumotlar bazasi fayllari, foydalanuvchi ma'lumotlari.
 7. Har vazifa oxirida qisqa hisobot beriladi: qaysi bo'lak qaysi modelda bajarildi.
-8. DeepSeek MCP tool'lari (`delegate_to_deepseek` va boshqalar) sessiyada bo'lmasa, C-daraja ishlar `dirijyor:builder` ga beriladi.
+8. DeepSeek MCP tool'lari (`delegate_to_deepseek` va boshqalar) sessiyada bo'lmasa, C-daraja ishlar `builder` ga beriladi.
+
+Agent nomlari: repoga nusxalanganda `scout`, `builder`, `bulk-worker`; plugin orqali o'rnatilganda `dirijyor:scout`, `dirijyor:builder`, `dirijyor:bulk-worker`.
 
 Loyihaga xos ma'lumotlar (fayl xaritasi, tekshirish buyruqlari) loyihaning o'z `CLAUDE.md` faylida bo'ladi.

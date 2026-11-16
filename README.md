@@ -33,6 +33,7 @@ To'liq qoidalar: [`rules/routing.md`](rules/routing.md).
 agents/              # scout (Haiku), builder (Sonnet), bulk-worker (Haiku → DeepSeek)
 hooks/hooks.json     # SessionStart: har sessiya boshida routing qoidalarini kontekstga qo'shadi
 rules/routing.md     # routing qoidalari matni
+scripts/install-to-repo.sh  # agentlar + qoidalarni loyiha repoga nusxalash (bulut uchun)
 ```
 
 Plugin ichidagi `CLAUDE.md` Claude Code tomonidan yuklanmaydi, shuning uchun qoidalar `SessionStart` hook orqali kiritiladi.
@@ -54,19 +55,25 @@ Asosiy modelni Opus qilish uchun `~/.claude/settings.json` ga qo'shing (plugin b
 
 Tekshirish: Claude Code ichida `/agents` buyrug'i `dirijyor:scout`, `dirijyor:builder`, `dirijyor:bulk-worker` agentlarini ko'rsatishi kerak.
 
-### Bulut sessiyalarida (claude.ai/code) va jamoa uchun
+### Bulut sessiyalarida (claude.ai/code, telefon ilovasi)
 
-Loyiha repozitoriyasidagi `.claude/settings.json` ga qo'shing — repo ochilganda plugin avtomatik taklif qilinadi va yoqiladi:
+Bulut sessiyasi plugin **o'rnatmaydi** — hatto repodagi `.claude/settings.json` da `enabledPlugins` bo'lsa ham.
+U faqat repoga commit qilingan `.claude/agents/` va `.claude/rules/` ni yuklaydi. Shuning uchun agentlar va
+qoidalarni loyiha repozitoriyasiga nusxalang:
 
-```json
-{
-  "model": "opus",
-  "extraKnownMarketplaces": {
-    "dirijyor": { "source": { "source": "github", "repo": "yil-2002/agent" } }
-  },
-  "enabledPlugins": { "dirijyor@dirijyor": true }
-}
+```bash
+git clone https://github.com/yil-2002/agent
+agent/scripts/install-to-repo.sh /yo'l/loyiha-repo
+cd /yo'l/loyiha-repo && git add .claude && git commit -m "Add dirijyor agents" && git push
 ```
+
+Natija: `.claude/agents/{scout,builder,bulk-worker}.md` va `.claude/rules/dirijyor-routing.md`.
+Bunday repoda agentlar `scout`, `builder`, `bulk-worker` nomi bilan ko'rinadi. Qoidalar yangilansa, skriptni qayta ishga tushiring.
+
+Asosiy modelni Opus qilish uchun o'sha reponing `.claude/settings.json` iga `{"model": "opus"}` qo'shing.
+
+> O'z kompyuteringizda plugin o'rnatilgan bo'lsa, nusxalangan repoda agentlar ikki marta ko'rinadi
+> (`scout` va `dirijyor:scout`) — bu zararsiz, repodagi nusxa ishlatiladi.
 
 Loyihaga xos ma'lumotlarni (fayl xaritasi, tekshirish buyruqlari) loyihaning o'z `CLAUDE.md` fayliga yozing.
 
