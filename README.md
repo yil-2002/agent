@@ -93,6 +93,10 @@ Kalit `~/.deepseek-mcp/config.json` ga yoziladi (Windows'da `DEEPSEEK_API_KEY`).
 
 Bulut sessiyasida DeepSeek uchun qo'shimcha sozlash kerak: muhit tarmog'ida `api.deepseek.com` ga ruxsat va kalitni muhitning network secret'ida saqlash.
 
+## 🎬 Video montaj (Mac)
+
+Claude bilan video montaj qilish uchun tayyor ish papkasi (FFmpeg + Whisper + Remotion): [`video-montaj/`](video-montaj/README.md).
+
 ## Yangilash
 
 ```bash
